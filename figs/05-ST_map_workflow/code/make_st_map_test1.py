@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -17,10 +18,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+FIG_DIR = Path(__file__).resolve().parents[1]
+
+# 原始 ST 矩阵与其 JSON 元数据位于受控的 data/ 目录，不随本仓分发；
+# 用 ST_SOURCE 环境变量或 --source-dir 指向本地副本即可复现。
 DEFAULT_SOURCE = Path(
-    r"D:\NailfoldAnalyzer\data\test_video\test1\ST_Output"
+    os.environ.get("ST_SOURCE", FIG_DIR / "data" / "test1" / "ST_Output")
 )
-DEFAULT_OUTPUT = Path(r"E:\LeukoTrack-NF\figs\2026721\st_map.png")
+DEFAULT_OUTPUT = FIG_DIR / "fig" / "st_map_workflow_velocity_selected.png"
 
 
 def parse_args() -> argparse.Namespace:

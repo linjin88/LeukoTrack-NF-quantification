@@ -19,6 +19,14 @@ DATA_DIR = FIG_DIR / "data"
 PAPER_FIG = FIG_DIR / "fig" / "roi_generation_process.png"
 ROI_OUT = DATA_DIR
 
+# --- 外部依赖与受控输入（均不随本仓发布）-----------------------------
+# NAILFOLD_ROOT 指向本机上的分析工具包副本；未设置时按 data/NailfoldAnalyzer
+# 查找。所有输入都从受控的 data/ 目录读取，该目录不在本仓中分发。
+NAILFOLD_ROOT = Path(os.environ.get("NAILFOLD_ROOT", DATA_DIR / "NailfoldAnalyzer"))
+MODEL_PATH = Path(os.environ.get("DPA_MODEL_PATH", DATA_DIR / "models" / "dpa_best.pt"))
+TEST1_MAIN = Path(os.environ.get("TEST1_MAIN", DATA_DIR / "test1" / "main.mp4"))
+TEST1_AUX = Path(os.environ.get("TEST1_AUX", DATA_DIR / "test1" / "aux.mp4"))
+
 CLUSTER_COLORS = np.array(
     [
         [0.12, 0.47, 0.71],
